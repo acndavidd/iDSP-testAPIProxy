@@ -13,7 +13,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.put("/apimysmartws/*", function(req, res){
+app.put("/opisnet/*", function(req, res){
 
 	var fullUrl = 'https://staging.smart.com.ph' + req.path;
 	
@@ -47,7 +47,7 @@ app.post("/apimysmartws/*", function(req, res){
   
 });
 
-app.get("/apimysmartws/*", function(req, res){
+app.get("/opisnet/*", function(req, res){
 	
 	var fullUrl = 'https://staging.smart.com.ph' + req.path;
 	
