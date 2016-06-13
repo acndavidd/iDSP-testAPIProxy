@@ -1,0 +1,42 @@
+var express = require('express');
+var app = express();
+var proxy = require('express-http-proxy');
+var port = (process.env.PORT || 5000);
+
+var url = require("url");
+var proxyUrl = url.parse(process.env.QUOTAGUARDSTATIC_URL);
+  
+var auth = "Basic " + (new Buffer(proxyUrl.auth).toString("base64"));
+
+app.set('port', port);
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", 
+    "Access-Control-Allow-Origin, X-Requested-With, Content-Type, Accept,Authorization,Proxy-Authorization,X-session");
+	
+    next();
+});
+
+app.use(proxy('us-east-1-static-hopper.quotaguard.com:9293', {
+  forwardPath: function(req, res) {
+    return require('url').parse(req.url).path;
+  },
+  decorateRequest: function(req) {
+       req.headers['Proxy-Authorization'] = auth;
+	   req.headers['User-Agent'] = 'node.js';
+	   req.headers['Host'] = 'apis.someweb.com:7443';
+       return req;
+  }
+}));
+
+app.get('/*', function(req, res) {
+	
+  throw new Error();
+});
+
+
+app.listen(port);
+
+
+
