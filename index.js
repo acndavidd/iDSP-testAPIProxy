@@ -32,7 +32,7 @@ app.put("/opisnet/*", function(req, res){
 
 app.post("/RestAdapter/*", function(req, res){
 
-	var fullUrl = 'https://stg.apis.smart.com.ph/' + req.path;
+	var fullUrl = 'https://stg.apis.smart.com.ph' + req.path;
 	
 	var options = {
 		proxy: process.env.QUOTAGUARDSTATIC_URL,
