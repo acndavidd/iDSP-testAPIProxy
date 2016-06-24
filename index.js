@@ -33,7 +33,7 @@ app.put("/opisnet/*", function(req, res){
 app.post("/RestAdapter/*", function(req, res){
 
 	var fullUrl = 'https://stg.apis.smart.com.ph' + req.path;
-	
+	    
 	var options = {
 		proxy: process.env.QUOTAGUARDSTATIC_URL,
 		url: fullUrl,
@@ -43,6 +43,23 @@ app.post("/RestAdapter/*", function(req, res){
 		}
 	};
 	console.log(fullUrl);
+	req.pipe(request.post(options)).pipe(res);
+  
+});
+
+app.post("/opisnet/*", function(req, res){
+	
+	var fullUrl = 'https://csptraining.smart.com.ph' + req.path;
+	
+	var options = {
+		proxy: process.env.QUOTAGUARDSTATIC_URL,
+		url: fullUrl,
+		form:req.body,
+		headers: {
+			'User-Agent': 'node.js'
+		}
+	};
+	
 	req.pipe(request.post(options)).pipe(res);
   
 });
