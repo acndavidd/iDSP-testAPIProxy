@@ -43,6 +43,7 @@ app.post("/RestAdapter/*", function(req, res){
 		}
 	};
 	console.log(fullUrl);
+    console.log(req.body);
 	req.pipe(request.post(options)).pipe(res);
   
 });
@@ -59,7 +60,8 @@ app.post("/opisnet/*", function(req, res){
 			'User-Agent': 'node.js'
 		}
 	};
-	
+	console.log(fullUrl);
+    console.log(req.body);
 	req.pipe(request.post(options)).pipe(res);
   
 });
