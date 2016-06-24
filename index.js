@@ -42,7 +42,7 @@ app.post("/RestAdapter/*", function(req, res){
 			'User-Agent': 'node.js'
 		}
 	};
-	
+	console.log(fullUrl);
 	req.pipe(request.post(options)).pipe(res);
   
 });
